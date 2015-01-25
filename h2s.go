@@ -17,6 +17,7 @@ func Replace(r io.Reader) (string, error) {
 	if body.Length() > 0 {
 		html = body.First().Children()
 	}
+
 	html.Find("pre").Each(func(_ int, s *goquery.Selection) {
 		s.ReplaceWithSelection(s.Children())
 	})
@@ -35,6 +36,9 @@ func Replace(r io.Reader) (string, error) {
 	html.Find("br").Each(func(_ int, s *goquery.Selection) {
 		s.ReplaceWithHtml("\n")
 	})
+	html.Find("li").Each(func(_ int, s *goquery.Selection) {
+		s.ReplaceWithHtml(fmt.Sprintf("[*]%s", s.Text()))
+	})
 	normal := map[string]string{
 		"h1":         "h1",
 		"b":          "b",
@@ -43,16 +47,11 @@ func Replace(r io.Reader) (string, error) {
 		"s, spoiler": "spoiler",
 		"ul":         "list",
 		"ol":         "olist",
-		"li":         "*",
 		"code":       "code",
 	}
 	for k, v := range normal {
 		html.Find(k).Each(func(_ int, s *goquery.Selection) {
-			if v != "*" {
-				s.ReplaceWithHtml(fmt.Sprintf("[%s]%s[/%s]", v, s.Text(), v))
-			} else {
-				s.ReplaceWithHtml(fmt.Sprintf("[*]%s", s.Text()))
-			}
+			s.ReplaceWithHtml(fmt.Sprintf("[%s]%s[/%s]", v, s.Text(), v))
 		})
 	}
 	return html.Text(), nil
