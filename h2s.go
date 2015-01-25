@@ -17,10 +17,6 @@ func Replace(r io.Reader) (string, error) {
 	if body.Length() > 0 {
 		html = body.First().Children()
 	}
-
-	html.Find("pre").Each(func(_ int, s *goquery.Selection) {
-		s.ReplaceWithSelection(s.Children())
-	})
 	html.Find("a").Each(func(_ int, s *goquery.Selection) {
 		url, _ := s.Attr("href")
 		text := s.Text()
