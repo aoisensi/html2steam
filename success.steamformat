@@ -1,0 +1,24 @@
+[h1]Header[/h1]
+[b]Bold[/b]
+[u]UnderLine[/u]
+[i]Italic[/i]
+[spoiler]Strike[/spoiler]
+[url=http://steamcommunity.com/comment/ForumTopic/formattinghelp]Link[/url]
+[list]
+	[*]Scout
+	[*]Soldir
+	[*]Pyro
+	[*]Heavy
+	[*]Demoman
+	[*]Enginner
+	[*]Medic
+	[*]Sniper
+	[*]Spy
+[/list]
+[olist]
+	[*]Team Building
+	[*]Mass and Velocity
+	[*]Hard-Light Surfaces
+	[*]Excusion Funnels
+	[*]Mobility Gels
+[/olist]
